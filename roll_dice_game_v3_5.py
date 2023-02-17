@@ -1,25 +1,6 @@
-"""
-How your code will be evaluated:
-The game works as it is supposed to: [20 marks]
-- Asks for the number of players. [2 marks]
-- Asks for the number of rounds. [2 marks]
-- Shows an empty scoreboard before the start of the game. [2 marks]
-- Prompts each player to roll their dices. [2 marks]
-- Generates random numbers for each dice per user per round. [2 marks]
-- Shows the scoreboard after the end of each round. [2 marks]
-- At the end of the game the final scoreboard is displayed. [2 marks]
-- The winner is congratulated. [2 marks]
-- Asks if the players want to have another game. [2 marks]
-- No third party library is used [2 marks]
-- Bonus marks will be awarded for proper usage of functions and
-documentation of your code (comments before each function or
-command etc.). [2 marks]
-"""
-
 # Importing standard module(s).
 from random import randint, choice
-from datetime import datetime
-
+from datetime import datetime, time
 
 def roll_dice():
     """
@@ -32,8 +13,24 @@ def roll_dice():
 def greetings():
     """Welcome massage."""
     # Welcoming the user.
-    say_hi = ["Welcome!", "Hi there!", "Hi!", "Hello!", "Howdy!"]
-    print("\n" + choice(say_hi))
+    current_time = datetime.now().time()
+    morning_start = time(hour=6, minute=0)
+    morning_end = time(hour=12, minute=0)
+    afternoon_start = time(hour=12, minute=0)
+    afternoon_end = time(hour=18, minute=0)
+    evening_start = time(hour=18, minute=0)
+    evening_end = time(hour=23, minute=59)
+    morning_greetings = ['Good morning!', "Hey!", "Welcome!", "Hi there!", "Hi!", "Hello!", "What's up!"]
+    afternoon_greetings = ['Good afternoon!', "Hey!", "Welcome!", "Hi there!", "Hi!", "Hello!", "What's up!"]
+    evening_greetings = ['Good evening!', "Hey!", "Welcome!", "Hi there!", "Hi!", "Hello!", "What's up!"]
+    if morning_start <= current_time <= morning_end:
+        greet_type = morning_greetings
+    elif afternoon_start <= current_time <= afternoon_end:
+        greet_type = afternoon_greetings
+    elif evening_start <= current_time <= evening_end:
+        greet_type = evening_greetings
+    print(choice(greet_type))
+
     print("\nHere comes another multi-player dice rolling game!")
     t = datetime.now().strftime("[%a, %d/%b/%Y %I:%M:%S %p]\n")
     print(t)
@@ -46,7 +43,6 @@ def greetings():
             print("Good afternoon, " + greetings.username.title() + ".\n")
         else:
             print("Good evening, " + greetings.username.title() + ".\n")
-
     except KeyboardInterrupt:
         print("Game interrupted by user.")
         return exit_retry()  # Connecting to the exit function.
@@ -130,9 +126,9 @@ def two_player_dice_roll():
     num_of_dice = 2
     min_round = 1
     # Showing empty scoreboard.
-    print("*************************************************************")
+    print("*"*61)
     print("Scoreboard")
-    print("*************************************************************")
+    print("*"*61)
     print(
         "Name(s)       Chosen Rounds("
         + str(select_round.max_rounds)
@@ -141,13 +137,15 @@ def two_player_dice_roll():
     print("  --              ", "--                  ", "--            ")
     print("  --              ", "--                  ", "--            ")
     print("  --              ", "--                  ", "--            ")
-    print("*************************************************************\n")
+    print("*"*61, "\n")
     # Given the round(s) the players wish to play.
     # while min_round > 0 and min_round <= select_round.max_rounds:
     while 0 < min_round <= select_round.max_rounds:
         # First player rolls dice.
         print(
-            "********************** Start of round", min_round, "*********************"
+            "********************** Start of round", 
+            min_round, 
+            "*********************"
         )
         print("Name(s)          Round(" + str(min_round) + ")          Total score")
         player_1 = input("Please enter the player #1 name to roll dice: ")
@@ -165,9 +163,9 @@ def two_player_dice_roll():
             "***********************\n",
         )
         # Showing scoreboard.
-        print("*************************************************************")
+        print("*"*61)
         print("Scoreboard")
-        print("*************************************************************")
+        print("*"*61)
         print("Name(s)       Round(" + str(min_round) + ")       Total score")
         print(player_1.title(), "          ", dice_1, "          ", dice_sum1)
         print(player_2.title(), "          ", dice_2, "          ", dice_sum2)
@@ -232,9 +230,9 @@ def three_player_dice_roll():
     num_of_dice = 2
     min_round = 1
     # Showing empty scoreboard.
-    print("*************************************************************")
+    print("*"*61)
     print("Scoreboard")
-    print("*************************************************************")
+    print("*"*61)
     print(
         "Name(s)       Chosen Rounds("
         + str(select_round.max_rounds)
@@ -243,12 +241,14 @@ def three_player_dice_roll():
     print("  --              ", "--                  ", "--            ")
     print("  --              ", "--                  ", "--            ")
     print("  --              ", "--                  ", "--            ")
-    print("*************************************************************\n")
+    print("*"*61, "\n")
     # Given the round(s) the players wish to play.
     while 0 < min_round <= select_round.max_rounds:
         # First player rolls dice.
         print(
-            "********************** Start of round", min_round, "*********************"
+            "********************** Start of round", 
+            min_round, 
+            "*********************"
         )
         print("Name(s)          Round(" + str(min_round) + ")          Total score")
         player_1 = input("Please enter the player #1 name to roll dice: ")
@@ -271,9 +271,9 @@ def three_player_dice_roll():
             "***********************\n",
         )
         # Showing scoreboard.
-        print("*************************************************************")
+        print("*"*61)
         print("Scoreboard")
-        print("*************************************************************")
+        print("*"*61)
         print("Name(s)       Round(" + str(min_round) + ")       Total score")
         print(player_1.title(), "          ", dice_1, "          ", dice_sum1)
         print(player_2.title(), "          ", dice_2, "          ", dice_sum2)
@@ -351,9 +351,9 @@ def four_player_dice_roll():
     num_of_dice = 2
     min_round = 1
     # Showing empty scoreboard.
-    print("*************************************************************")
+    print("*"*61)
     print("Scoreboard")
-    print("*************************************************************")
+    print("*"*61)
     print(
         "Name(s)       Chosen Rounds("
         + str(select_round.max_rounds)
@@ -362,12 +362,14 @@ def four_player_dice_roll():
     print("  --              ", "--                  ", "--            ")
     print("  --              ", "--                  ", "--            ")
     print("  --              ", "--                  ", "--            ")
-    print("*************************************************************\n")
+    print("*"*61, "\n")
     # Given the round(s) the players wish to play.
     while 0 < min_round <= select_round.max_rounds:
         # First player rolls dice.
         print(
-            "********************** Start of round", min_round, "*********************"
+            "********************** Start of round",
+             min_round, 
+             "*********************"
         )
         print("Name(s)          Round(" + str(min_round) + ")          Total score")
         player_1 = input("Please enter the player #1 name to roll dice: ")
@@ -395,9 +397,9 @@ def four_player_dice_roll():
             "***********************\n",
         )
         # Showing scoreboard.
-        print("*************************************************************")
+        print("*"*61)
         print("Scoreboard")
-        print("*************************************************************")
+        print("*"*61)
         print("Name(s)       Round(" + str(min_round) + ")       Total score")
         print(player_1.title(), "          ", dice_1, "          ", dice_sum1)
         print(player_2.title(), "          ", dice_2, "          ", dice_sum2)
