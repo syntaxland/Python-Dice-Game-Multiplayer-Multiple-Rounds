@@ -1,6 +1,8 @@
 # Importing standard module(s).
+import time
+import datetime
 from random import randint, choice
-from datetime import datetime, time
+
 
 def roll_dice():
     """
@@ -13,13 +15,13 @@ def roll_dice():
 def greetings():
     """Welcome massage."""
     # Welcoming the user.
-    current_time = datetime.now().time()
-    morning_start = time(hour=6, minute=0)
-    morning_end = time(hour=12, minute=0)
-    afternoon_start = time(hour=12, minute=0)
-    afternoon_end = time(hour=18, minute=0)
-    evening_start = time(hour=18, minute=0)
-    evening_end = time(hour=23, minute=59)
+    current_time = datetime.datetime.now().time()
+    morning_start = datetime.time(hour=6, minute=0)
+    morning_end = datetime.time(hour=12, minute=0)
+    afternoon_start = datetime.time(hour=12, minute=0)
+    afternoon_end = datetime.time(hour=18, minute=0)
+    evening_start = datetime.time(hour=18, minute=0)
+    evening_end = datetime.time(hour=23, minute=59)
     morning_greetings = ['Good morning!', "Hey!", "Welcome!", "Hi there!", "Hi!", "Hello!", "What's up!"]
     afternoon_greetings = ['Good afternoon!', "Hey!", "Welcome!", "Hi there!", "Hi!", "Hello!", "What's up!"]
     evening_greetings = ['Good evening!', "Hey!", "Welcome!", "Hi there!", "Hi!", "Hello!", "What's up!"]
@@ -31,18 +33,45 @@ def greetings():
         greet_type = evening_greetings
     print(choice(greet_type))
 
-    print("\nHere comes another multi-player dice rolling game!")
-    t = datetime.now().strftime("[%a, %d/%b/%Y %I:%M:%S %p]\n")
-    print(t)
+    # print("\nHere comes another multi-player dice rolling game!")
+    # t = datetime.datetime.now().strftime("[%a, %d/%b/%Y %I:%M:%S %p]\n")
+    # print(t)
+    text =  "\nHere comes another multi-player dice rolling game!\n"
+    for c in text:
+        print(c, end='', flush=True)
+        time.sleep(0.1)
+    t = datetime.datetime.now().strftime("[%a, %d/%b/%Y %I:%M:%S %p]\n")
+    for c in t:
+        print(c, end='', flush=True)
+        time.sleep(0.1)
     try:
-        greetings.username = input("Please what can I call you? ")
-        currentTime = datetime.now()
+        # greetings.username = input("\nPlease what can I call you? ")
+        # currentTime = datetime.datetime.now()
+        # if currentTime.hour < 12:
+        #     print("Good morning, " + greetings.username.title() + ".\n")
+        # elif 12 <= currentTime.hour < 18:
+        #     print("Good afternoon, " + greetings.username.title() + ".\n")
+        # else:
+        #     print("Good evening, " + greetings.username.title() + ".\n")
+    
+        greetings.username = input("\nPlease what can I call you? ")
+        currentTime = datetime.datetime.now()
         if currentTime.hour < 12:
-            print("Good morning, " + greetings.username.title() + ".\n")
+            morning = "Good morning, " + greetings.username.title() + ".\n"
+            for char in morning:
+                print(char, end='', flush=True)
+                time.sleep(0.1)
         elif 12 <= currentTime.hour < 18:
-            print("Good afternoon, " + greetings.username.title() + ".\n")
+            afternoon= "Good afternoon, " + greetings.username.title() + ".\n"
+            for char in afternoon:
+                print(char, end='', flush=True)
+                time.sleep(0.1)
         else:
-            print("Good evening, " + greetings.username.title() + ".\n")
+            evening = "Good evening, " + greetings.username.title() + ".\n"
+            for char in evening:
+                print(char, end='', flush=True)
+                time.sleep(0.1)
+    
     except KeyboardInterrupt:
         print("Game interrupted by user.")
         return exit_retry()  # Connecting to the exit function.
@@ -53,7 +82,7 @@ def select_players():
     try:
         # Selecting the number of players.
         num_of_players = int(
-            input("Please enter the number of players (from 2 to 4): ")
+            input("\nPlease enter the number of players (from 2 to 4): ")
         )
         if num_of_players == 2:
             print("The number of players selected:", num_of_players, "\n")
@@ -497,6 +526,33 @@ def exit_retry():
                 select_players()
             elif retry == 2:
                 print("Your choice:", retry)
+                # say_goodbye = [
+                #     "See you later.",
+                #     "See you later, " + greetings.username.title() + ".",
+                #     "Thank you and see you again.",
+                #     "Thank you and see you again, " + greetings.username.title() + ".",
+                #     "Thank you and see you later.",
+                #     "Thank you and see you later, " + greetings.username.title() + ".",
+                #     "Nice having you around.",
+                #     "Nice having you around, " + greetings.username.title() + ".",
+                #     "Goodbye.",
+                #     "Goodbye, " + greetings.username.title() + ".",
+                #     "Thanks for checking in!",
+                #     "Thanks for checking in, " + greetings.username.title() + ".",
+                #     "Thank you and have a nice day.",
+                #     "Thank you and have a nice day, "
+                #     + greetings.username.title()
+                #     + ".",
+                #     "Have a nice day.",
+                #     "Have a nice day, " + greetings.username.title() + ".",
+                #     "Take care.",
+                #     "Take care, " + greetings.username.title() + ".",
+                #     "See you again",
+                #     "See you again, " + greetings.username.title() + ".",
+                #     "See you soon.",
+                #     "See you soon, " + greetings.username.title() + ".",
+                # ]
+                # print(choice(say_goodbye), "\n")
                 say_goodbye = [
                     "See you later.",
                     "See you later, " + greetings.username.title() + ".",
@@ -523,7 +579,9 @@ def exit_retry():
                     "See you soon.",
                     "See you soon, " + greetings.username.title() + ".",
                 ]
-                print(choice(say_goodbye), "\n")
+                for char in choice(say_goodbye):
+                    print(char, end='', flush=True)
+                    time.sleep(0.1)
                 active = False
             else:
                 print("Invalid input. Your value must be a number: 1 or 2.\n")
